@@ -1,0 +1,5 @@
+/mytranslator/target/
+.metadata/
+.recommenders/
+.sonarlint/
+RemoteSystemsTempFiles/
