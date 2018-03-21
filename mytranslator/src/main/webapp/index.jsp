@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+    
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -10,9 +12,12 @@
 
 Please enter your text to translate to Portuguese:
 
-<form action="">
-	<textarea rows="10" cols="30"></textarea>
-</form>
+<f:form action="translate" method="get" commandName="text">
+	<f:textarea rows="10" cols="60" path="originalText" id="originalText"/>
+	
+	<br>
+	<f:button type="submit">Translate</f:button>
+</f:form>
 
 </body>
 </html>
