@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import mytranslator.model.Text;
+import mytranslator.oxford.api.ApiCaller;
 
 @Controller
 public class TranslatorController {
@@ -18,8 +19,12 @@ public class TranslatorController {
 		System.out.println("calling translate method");
 		System.out.println("Received text: " + text.getOriginalText());
 
-		// TODO: call Oxford dictionaries API
-		text.setTranslatedText("default");
+		if (null == text.getOriginalText() || text.getOriginalText().isEmpty()) {
+			return "invalid text";
+		}
+
+		ApiCaller apiCaller = new ApiCaller(text.getOriginalText());
+		text.setTranslatedText(apiCaller.callApi());
 
 		return MessageFormat.format("Translated text: {0}", text.getTranslatedText());
 	}
