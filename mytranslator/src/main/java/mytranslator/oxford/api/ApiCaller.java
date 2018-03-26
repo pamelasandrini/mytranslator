@@ -1,10 +1,13 @@
 package mytranslator.oxford.api;
 
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class ApiCaller {
 
@@ -23,32 +26,45 @@ public class ApiCaller {
 	}
 
 	public String callApi() {
-		// do something
 
+		String translation;
 		try {
 			URL url = new URL(buildUrl());
-			HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-			urlConnection.setRequestProperty("Accept", "application/json");
-			urlConnection.setRequestProperty("app_id", credentials.getApp_id());
-			urlConnection.setRequestProperty("app_key", credentials.getApp_key());
+			HttpsURLConnection request = (HttpsURLConnection) url.openConnection();
+			request.setRequestProperty("Accept", "application/json");
+			request.setRequestProperty("app_id", credentials.getApp_id());
+			request.setRequestProperty("app_key", credentials.getApp_key());
 
-			// read the output from the server
-			BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-			StringBuilder stringBuilder = new StringBuilder();
+			request.connect();
 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				stringBuilder.append(line + "\n");
-			}
+			// Convert to a JSON object
+			JsonParser jp = new JsonParser();
+			JsonElement root = jp.parse(new InputStreamReader(request.getInputStream()));
 
-			return stringBuilder.toString();
+			// reading the response
+			JsonObject response = root.getAsJsonObject();
+			JsonObject resultsObject = response.getAsJsonArray("results").get(0).getAsJsonObject();
+			System.out.println("result: " + resultsObject);
+
+			JsonObject lexicalEntriesObject = resultsObject.getAsJsonArray("lexicalEntries").get(0).getAsJsonObject();
+
+			JsonObject entriesObject = lexicalEntriesObject.getAsJsonArray("entries").get(0).getAsJsonObject();
+
+			JsonObject sensesObject = entriesObject.getAsJsonArray("senses").get(0).getAsJsonObject();
+
+			JsonObject translationsObject = sensesObject.getAsJsonArray("translations").get(0).getAsJsonObject();
+
+			translation = translationsObject.get("text").getAsString();
+
+			System.out.println(translation);
+
+			return translation;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return e.toString();
 		}
 
-		// return "translation";
 	}
 
 	private String buildUrl() {
