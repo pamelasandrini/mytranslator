@@ -7,8 +7,8 @@ public class ApiCredentials {
 
 	{
 		// TODO: get it from config file
-		app_id = "XXXXX";
-		app_key = "YYYYYYYYYY";
+		app_id = "266b0234";
+		app_key = "0c20f7358c9448b782925dde41f76242";
 
 		System.out.println(this);
 	}
