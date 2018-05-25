@@ -12,6 +12,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import mytranslator.properties.PropertiesUtil;
+
 /**
  * Class that make the call to Oxford Dictionaries API and processes the
  * response.
@@ -21,8 +23,8 @@ import com.google.gson.JsonParser;
  */
 public class ApiCallable implements Callable<String> {
 
-	// TODO: get it from config file
-	private final String API_URL = "https://od-api.oxforddictionaries.com:443/api/v1/entries/";
+	private PropertiesUtil prop = new PropertiesUtil();
+	private String apiUrl;
 
 	private ApiCredentials credentials;
 	private Languages languages;
@@ -33,6 +35,7 @@ public class ApiCallable implements Callable<String> {
 		this.word = word.toLowerCase();
 		languages = new Languages();
 		credentials = new ApiCredentials();
+		apiUrl = prop.getValue("api_url");
 	}
 
 	@Override
@@ -85,7 +88,7 @@ public class ApiCallable implements Callable<String> {
 
 	private String buildUrl() {
 
-		String url = API_URL + languages.getLanguage() + "/" + word + "/translations=" + languages.getTargetLanguage();
+		String url = apiUrl + languages.getLanguage() + "/" + word + "/translations=" + languages.getTargetLanguage();
 		System.out.println("url " + url);
 		return url;
 	}

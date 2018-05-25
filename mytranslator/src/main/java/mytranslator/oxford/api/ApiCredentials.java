@@ -1,14 +1,16 @@
 package mytranslator.oxford.api;
 
+import mytranslator.properties.PropertiesUtil;
+
 public class ApiCredentials {
 
 	private String app_id;
 	private String app_key;
+	private PropertiesUtil prop = new PropertiesUtil();
 
 	{
-		// TODO: get it from config file
-		app_id = "266b0234";
-		app_key = "0c20f7358c9448b782925dde41f76242";
+		app_id = prop.getValue("app_id");
+		app_key = prop.getValue("app_key");
 
 		System.out.println(this);
 	}
@@ -30,7 +32,7 @@ public class ApiCredentials {
 	}
 
 	public String toString() {
-		return "app_id : " + app_id + " app_key : " + app_key;
+		return "ApiCredentials \n app_id : " + app_id + " app_key : " + app_key;
 	}
 
 }

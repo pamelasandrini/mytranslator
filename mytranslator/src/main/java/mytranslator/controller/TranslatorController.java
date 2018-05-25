@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import mytranslator.concurrency.ParallelApiCall;
 import mytranslator.model.Text;
+import mytranslator.properties.PropertiesUtil;
 
 @Controller
 public class TranslatorController {

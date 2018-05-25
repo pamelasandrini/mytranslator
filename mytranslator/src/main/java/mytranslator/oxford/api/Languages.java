@@ -1,14 +1,16 @@
 package mytranslator.oxford.api;
 
+import mytranslator.properties.PropertiesUtil;
+
 public class Languages {
 
 	private String language;
 	private String targetLanguage;
+	private PropertiesUtil prop = new PropertiesUtil();
 
 	{
-		// TODO: get it from config file
-		language = "en";
-		targetLanguage = "pt";
+		language = prop.getValue("language");
+		targetLanguage = prop.getValue("target_language");
 		System.out.println(this);
 	}
 
