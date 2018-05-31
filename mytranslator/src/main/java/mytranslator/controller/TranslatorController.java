@@ -1,10 +1,7 @@
 package mytranslator.controller;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import mytranslator.concurrency.ParallelApiCall;
 import mytranslator.model.Text;
-import mytranslator.properties.PropertiesUtil;
 
 @Controller
 public class TranslatorController {
@@ -38,14 +34,15 @@ public class TranslatorController {
 		List<String> responseList = parallelCall.performApiCalls();
 
 		text.setTranslatedText(buildStringFromWords(responseList));
-		// TODO: display response
-		return MessageFormat.format("Translated text: {0}", text.getTranslatedText());
+		
+		return "index";
+		
 	}
 
 	private List<String> getWordsFromString(String text) {
 
 		List<String> wordList = new ArrayList<>();
-		if (text != null || !text.isEmpty()) {
+		if (text != null && !text.isEmpty()) {
 
 			String regex = "\\s";
 			wordList = Arrays.asList(text.split(regex));

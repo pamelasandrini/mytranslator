@@ -2,8 +2,6 @@ package mytranslator.oxford.api;
 
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.concurrent.Callable;
 
 import javax.net.ssl.HttpsURLConnection;

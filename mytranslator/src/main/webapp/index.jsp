@@ -16,6 +16,11 @@ Please enter your text to translate to Portuguese:
 	<f:textarea rows="10" cols="60" path="originalText" id="originalText"/>
 	
 	<br>
+	
+	Translation:
+	<f:input type="text" path="translatedText" id="translatedText" />
+	
+	<br>
 	<f:button type="submit">Translate</f:button>
 </f:form>
 
