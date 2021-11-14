@@ -1,6 +1,11 @@
 # mytranslator
 Java app that uses Oxford Dictionaries API.
 
+# technologies
+- Java 8
+- Spring MVC
+- JSP
+
 Run as: mvn clean install spring-boot:run
 
 The main URL to access the project is:
