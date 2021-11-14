@@ -5,6 +5,8 @@ Java app that uses Oxford Dictionaries API.
 - Java 8
 - Spring MVC
 - JSP
+- Java HttpsURLConnection
+- Java multithread (ExecutorService, Executors, FutureTask, Callable)
 
 Run as: mvn clean install spring-boot:run
 
